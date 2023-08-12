@@ -1,0 +1,31 @@
+{
+  "name": "review-app-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:piyushgarg-dev/review-app-api.git",
+  "author": "Piyush Garg <piyushgarg.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "local": "dotenv -c local -- npm run prisma:generate && concurrently \"serverless offline --stage local --disableCookieValidation\"",
+    "migrate:latest": "dotenv -c local -- prisma migrate deploy",
+    "prisma:migrate:local": "dotenv -c local -- prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "dotenv -c local -- prisma studio"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.2.1",
+    "esbuild": "^0.19.1",
+    "prisma": "^5.1.1",
+    "serverless": "^3.34.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-esbuild": "^1.46.0",
+    "serverless-offline": "^12.0.4",
+    "serverless-prune-plugin": "^2.0.2",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@prisma/client": "5.1.1"
+  }
+}

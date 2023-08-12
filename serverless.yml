@@ -1,0 +1,33 @@
+service: review-app
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-esbuild
+  - serverless-prune-plugin
+  - serverless-offline
+
+package:
+  patterns:
+    - "node_modules/.prisma/**"
+
+custom:
+  esbuild:
+    bundle: true
+    minify: true
+  prune:
+    automatic: true
+    number: 2
+  serverless-offline:
+    httpPort: 8000
+
+provider:
+  name: aws
+  stage: ${opt:stage}
+  runtime: nodejs18.x
+  timeout: 25
+  lambdaHashingVersion: 20201221
+  region: ap-south-1
+  profile: default
+  environment:
+    STAGE: ${self:provider.stage}
+    NODE_ENV: ${self:provider.stage}
