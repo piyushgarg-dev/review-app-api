@@ -13,6 +13,7 @@
     "prisma:studio": "dotenv -c local -- prisma studio"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "concurrently": "^8.2.0",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.2.1",
@@ -26,6 +27,11 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@prisma/client": "5.1.1"
+    "@apollo/server": "^4.9.1",
+    "@as-integrations/aws-lambda": "^3.1.0",
+    "@prisma/client": "5.1.1",
+    "graphql": "^16.8.0",
+    "jsonwebtoken": "^9.0.1",
+    "nanoid": "^4.0.2"
   }
 }
