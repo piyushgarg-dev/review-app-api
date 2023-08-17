@@ -8,6 +8,21 @@ class ProjectService {
       where: { ProjectAccessMapping: { every: { user: { id: userId } } } },
     })
   }
+
+  public static getProjectBySlug({
+    slug,
+    userId,
+  }: {
+    slug: string
+    userId: string
+  }) {
+    return prismaClient.project.findUnique({
+      where: {
+        slug,
+        ProjectAccessMapping: { every: { user: { id: userId } } },
+      },
+    })
+  }
 }
 
 export default ProjectService

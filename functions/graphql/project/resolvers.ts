@@ -8,6 +8,18 @@ const queries = {
     ensureAuthenticated(ctx)
     return ProjectService.getUserProjects(ctx.user?.id!)
   },
+  getProjectBySlug: async (
+    _: any,
+    { slug }: { slug: string },
+    ctx: ServerContext
+  ) => {
+    ensureAuthenticated(ctx)
+    const project = await ProjectService.getProjectBySlug({
+      slug,
+      userId: ctx.user?.id!,
+    })
+    return project
+  },
 }
 const mutations = {
   createProject: async (
