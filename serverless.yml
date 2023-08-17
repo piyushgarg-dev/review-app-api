@@ -8,7 +8,7 @@ plugins:
 
 package:
   patterns:
-    - "node_modules/.prisma/**"
+    - 'node_modules/.prisma/**'
 
 custom:
   esbuild:
@@ -31,3 +31,16 @@ provider:
   environment:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${self:provider.stage}
+
+functions:
+  graphql:
+    handler: functions/graphql/server.graphqlHandler
+    events:
+      - http:
+          path: /graphql
+          method: POST
+          cors: true
+      - http:
+          path: /graphql
+          method: GET
+          cors: true

@@ -11,7 +11,6 @@ export const types = `#graphql
         id: ID!
         firstName: String!
         lastName: String
-        username: String
         email: String!
         emailVerified: Boolean!
         authenticationType: String
@@ -21,4 +20,4 @@ export const types = `#graphql
         createdAt: Date
         updatedAt: Date
     }
-`;
+`

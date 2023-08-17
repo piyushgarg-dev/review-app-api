@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from './user'
 
 const typeDefs = `#graphql
     scalar Date
@@ -13,6 +13,6 @@ const typeDefs = `#graphql
         ${User.mutations}
     }
     
-`;
+`
 
-export default typeDefs;
+export default typeDefs

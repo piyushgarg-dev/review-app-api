@@ -1,9 +1,9 @@
-import { PrismaClient } from "@prisma/client/";
+import { PrismaClient } from '@prisma/client/'
 
-const isLocalEnv = process.env.NODE_ENV === "local";
+const isLocalEnv = process.env.NODE_ENV === 'local'
 
 const prismaClient = new PrismaClient({
-  log: isLocalEnv ? ["query"] : undefined,
-});
+  log: isLocalEnv ? ['query'] : undefined,
+})
 
-export default prismaClient;
+export default prismaClient
