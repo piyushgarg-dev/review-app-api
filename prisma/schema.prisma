@@ -20,19 +20,49 @@ enum UserRole {
   USER
 }
 
+enum ProjectAccessRole {
+  OWNER
+  ADMIN
+}
+
 model User {
-  id                  String                @id @default(uuid())
-  firstName           String                @map("first_name")
-  lastName            String?               @map("last_name")
-  email               String                @unique
-  emailVerified       Boolean               @default(false) @map("email_verified")
-  password            String?
-  salt                String?
-  authenticationType  AuthenticationType    @map("authentication_type")
-  profileImageURL     String?
-  role                UserRole              @default(USER)
-  createdAt           DateTime              @default(now()) @map("created_at")
-  updatedAt           DateTime              @updatedAt @map("updated_at")
-  
+  id                   String                 @id @default(uuid())
+  firstName            String                 @map("first_name")
+  lastName             String?                @map("last_name")
+  email                String                 @unique
+  emailVerified        Boolean                @default(false) @map("email_verified")
+  password             String?
+  salt                 String?
+  authenticationType   AuthenticationType     @map("authentication_type")
+  profileImageURL      String?
+  role                 UserRole               @default(USER)
+  createdAt            DateTime               @default(now()) @map("created_at")
+  updatedAt            DateTime               @updatedAt @map("updated_at")
+  ProjectAccessMapping ProjectAccessMapping[]
+
   @@map("users")
+}
+
+model Project {
+  id                   String                 @id @default(uuid())
+  name                 String
+  slug                 String                 @unique
+  createdAt            DateTime               @default(now()) @map("created_at")
+  updatedAt            DateTime               @updatedAt @map("updated_at")
+  ProjectAccessMapping ProjectAccessMapping[]
+
+  @@map("projects")
+}
+
+model ProjectAccessMapping {
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId String  @map("project_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  role ProjectAccessRole @default(OWNER)
+
+  @@unique([projectId, userId])
+  @@map("project_access_mapping")
 }
