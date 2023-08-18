@@ -1,3 +1,4 @@
+import slugify from 'slugify'
 import ProjectService from '../../../services/project'
 import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
@@ -31,7 +32,7 @@ const mutations = {
     const project = await ProjectService.create({
       data: {
         name: data.name,
-        slug: data.slug,
+        slug: slugify(data.slug),
         ProjectAccessMapping: {
           create: {
             role: 'OWNER',
