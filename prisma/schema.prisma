@@ -39,6 +39,7 @@ model User {
   createdAt            DateTime               @default(now()) @map("created_at")
   updatedAt            DateTime               @updatedAt @map("updated_at")
   ProjectAccessMapping ProjectAccessMapping[]
+  Forms                Form[]
 
   @@map("users")
 }
@@ -50,6 +51,7 @@ model Project {
   createdAt            DateTime               @default(now()) @map("created_at")
   updatedAt            DateTime               @updatedAt @map("updated_at")
   ProjectAccessMapping ProjectAccessMapping[]
+  Forms                Form[]
 
   @@map("projects")
 }
@@ -65,4 +67,55 @@ model ProjectAccessMapping {
 
   @@unique([projectId, userId])
   @@map("project_access_mapping")
+}
+
+model Form {
+  id   String @id @default(uuid())
+  name String
+  slug String
+
+  introTitle   String @map("intro_title")
+  introMessage String @map("intro_message")
+
+  promptTitle       String @map("prompt_title")
+  promptDescription String @map("prompt_description")
+
+  thankyouTitle   String @map("thankyou_title")
+  thankyouMessage String @map("thankyou_message")
+
+  enableCTA Boolean @default(false) @map("enable_cta")
+  ctaTitle  String  @map("cta_title")
+  ctaURL    String  @map("cta_url")
+
+  // Foreign Relations
+  project         Project @relation(fields: [projectId], references: [id])
+  projectId       String  @map("project_id")
+  createdBy       User    @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String  @map("created_by")
+
+  isActive Boolean @default(true) @map("is_active")
+
+  // Design
+  primaryColorHexCode    String @default("#6701E6") @map("primary_color_hex_code")
+  backgroundColorHexCode String @default("#FFFFFF") @map("background_color_hex_code")
+
+  // Prefrences
+  lang                     String  @default("en")
+  collectVideoTestimonials Boolean @default(false) @map("collect_video_testimonials")
+  collectTextTestimonials  Boolean @default(true) @map("collect_text_testimonials")
+  collectRatings           Boolean @default(true) @map("collect_ratings")
+  collectImages            Boolean @default(true) @map("collect_images")
+  collectEmail             Boolean @default(true) @map("collect_email")
+  collectJobTitle          Boolean @default(true) @map("collect_job_title")
+  collectUserImage         Boolean @default(true) @map("collect_user_image")
+  collectWebsiteURL        Boolean @default(true) @map("collect_website_url")
+  collectCompany           Boolean @default(true) @map("collect_company")
+
+  autoApproveTestimonials Boolean  @default(false) @map("auto_approve_testimonials")
+  autoAddTags             String[] @default([]) @map("auto_add_tags")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("forms")
 }
