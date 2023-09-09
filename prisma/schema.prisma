@@ -74,18 +74,18 @@ model Form {
   name String
   slug String
 
-  introTitle   String @map("intro_title")
-  introMessage String @map("intro_message")
+  introTitle   String  @map("intro_title")
+  introMessage String? @map("intro_message")
 
-  promptTitle       String @map("prompt_title")
-  promptDescription String @map("prompt_description")
+  promptTitle       String  @map("prompt_title")
+  promptDescription String? @map("prompt_description")
 
-  thankyouTitle   String @map("thankyou_title")
-  thankyouMessage String @map("thankyou_message")
+  thankyouTitle   String  @map("thankyou_title")
+  thankyouMessage String? @map("thankyou_message")
 
   enableCTA Boolean @default(false) @map("enable_cta")
-  ctaTitle  String  @map("cta_title")
-  ctaURL    String  @map("cta_url")
+  ctaTitle  String? @map("cta_title")
+  ctaURL    String? @map("cta_url")
 
   // Foreign Relations
   project         Project @relation(fields: [projectId], references: [id])
@@ -96,8 +96,8 @@ model Form {
   isActive Boolean @default(true) @map("is_active")
 
   // Design
-  primaryColorHexCode    String @default("#6701E6") @map("primary_color_hex_code")
-  backgroundColorHexCode String @default("#FFFFFF") @map("background_color_hex_code")
+  primaryColor    String @default("#6701E6") @map("primary_color_hex_code")
+  backgroundColor String @default("#FFFFFF") @map("background_color_hex_code")
 
   // Prefrences
   lang                     String  @default("en")
@@ -117,5 +117,6 @@ model Form {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@unique([slug, projectId])
   @@map("forms")
 }

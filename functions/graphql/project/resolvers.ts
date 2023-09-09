@@ -3,6 +3,8 @@ import ProjectService from '../../../services/project'
 import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
 import { CreateProjectData } from './interfaces'
+import { Project } from '@prisma/client'
+import FormService from '../../../services/form'
 
 const queries = {
   getUserProjects: (_: any, data: any, ctx: ServerContext) => {
@@ -49,4 +51,14 @@ const mutations = {
   },
 }
 
-export const resolvers = { queries, mutations }
+const extraResolvers = {
+  // Project: {
+  //   forms: async (parent: Project, variables: any, ctx: ServerContext) => {
+  //     ensureAuthenticated(ctx)
+  //     console.log(parent)
+  //     return FormService.getFormsByProjectId(parent.id)
+  //   },
+  // },
+}
+
+export const resolvers = { queries, mutations, extraResolvers }
