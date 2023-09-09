@@ -13,6 +13,10 @@ const queries = {
     ensureAuthenticated(ctx)
     return FormService.getFormsByProjectId(input.projectId)
   },
+  getFormById: async (_: any, { id }: { id: string }, ctx: ServerContext) => {
+    ensureAuthenticated(ctx)
+    return FormService.getFormById(id)
+  },
 }
 
 const mutations = {
@@ -43,7 +47,7 @@ const mutations = {
         project: { connect: { id: projectId } },
       },
     })
-    return form.slug
+    return form.id
   },
 }
 
