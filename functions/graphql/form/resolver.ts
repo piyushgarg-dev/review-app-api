@@ -2,7 +2,7 @@ import slugify from 'slugify'
 import FormService from '../../../services/form'
 import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
-import { CreateFormData, GetFormsInput } from './interfaces'
+import { CreateFormData, GetFormsInput, UpdateFormData } from './interfaces'
 
 const queries = {
   getForms: async (
@@ -33,8 +33,7 @@ const mutations = {
         slug: slugify(slug),
         introTitle: 'Share a testimonial!',
         introMessage: `Do you love using our product? We'd love to hear about it! - Share your experience with a quick video or text testimonial - Recording a video? Don't forget to smile 😊`,
-        promptTitle:
-          '- What do you like most about us? - Would you recommend us to a friend?',
+        promptTitle: 'Write a testimonial',
         promptDescription: `- What do you like most about us?\n- Would you recommend us to a friend?`,
         thankyouTitle: 'Thank you 🙏',
         thankyouMessage:
@@ -48,6 +47,15 @@ const mutations = {
       },
     })
     return form.id
+  },
+  updateForm: async (
+    _: any,
+    { data }: { data: UpdateFormData },
+    ctx: ServerContext
+  ) => {
+    ensureAuthenticated(ctx)
+    await FormService.updateFormById(data.id, data)
+    return true
   },
 }
 
