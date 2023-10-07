@@ -113,7 +113,7 @@ This repository contains the source code for review-app-api. Follow the instruct
 - You can install the docker desktop setup by visiting this page:
   https://docs.docker.com/desktop/install/windows-install/
 
-- npm comes bundled with nodejs so no need to worry
+
 
 
 
