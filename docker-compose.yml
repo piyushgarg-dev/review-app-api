@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     container_name: postgres-database
-    image: postgres
+    image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
