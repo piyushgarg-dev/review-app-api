@@ -88,6 +88,40 @@ To set up the development environment locally, follow these steps:
    ```bash
    yarn
    ```
+   ### Troubleshooting Yarn Installation(For Users Encountering Errors)
+
+If you encounter an error related to Yarn installation, follow these steps to resolve it:
+
+1. **Ensure Your Project is Marked as Private**: Open the `package.json` file in the root directory of your project and add the `"private": true` property if it's not already present:
+
+   ```json
+   "private": true
+   ```
+
+   This step is necessary to enable Yarn workspaces.
+
+2. **Update the `workspaces` Field**: In your `package.json` file, make sure the `"workspaces"` field is correctly configured to specify the directories that should be treated as workspace packages. For example:
+
+   ```json
+   "workspaces": [
+     "packages/*"
+   ]
+   ```
+
+   Adjust the pattern to match the directory structure of your project where your workspace packages are located.
+
+3. **Reinstall Dependencies**: After making these changes, run the following command to reinstall project dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+   This will ensure that Yarn sets up the workspace correctly.
+
+   
+
+By following these steps, you can resolve any issues related to Yarn workspaces and continue with the setup process.
+
 
 4. Copy the `.env.example` file to `.env.local` and configure the following
 	 environment variables in the `.env.local` file:
