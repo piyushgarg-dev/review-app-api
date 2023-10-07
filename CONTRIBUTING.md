@@ -84,7 +84,7 @@ To set up the development environment locally, follow these steps:
 4. Set up your `.env` file:
 
 - Duplicate `.env.example` to `.env`.
-- Use DATABASE_URL is postgressql://postgres:password@localhost:5432/review
+- Use DATABASE_URL is postgresql://postgres:password@localhost:5432/review
 - Use JWT_SECRET is anything you want ex:Superman123
 
 5. Set up schemas:
