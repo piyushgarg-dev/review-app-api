@@ -19,6 +19,8 @@ Before you start contributing, make sure you have:
 - A GitHub account.
 - Git installed on your local machine.
 - Node.js and npm (Node Package Manager) installed on your local machine.
+- Docker Desktop installed on your local machine.
+- Yarn installed on your local machine.
 
 ## Contributing Guidelines
 
@@ -55,9 +57,6 @@ We follow these guidelines for contributing:
 
 8. Create a pull request (PR) to the main repository's `main` branch.
 
-Before contributing or adding a new feature, please make sure you have already installed :
-
-- [Docker](https://docs.docker.com/engine/install/)
 
 ## Setting Up the Development Environment
 
