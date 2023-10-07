@@ -106,6 +106,17 @@ This repository contains the source code for review-app-api. Follow the instruct
     yarn --version
     ```
 
+- You can go thorugh the docker engine setup by visiting this page:
+   https://docs.docker.com/engine/install/
+
+
+- You can install the docker desktop setup by visiting this page:
+  https://docs.docker.com/desktop/install/windows-install/
+
+
+  
+   
+
   
     
 
