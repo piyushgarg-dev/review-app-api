@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -25,97 +22,92 @@ enum ProjectAccessRole {
   ADMIN
 }
 
+// User model represents users of the application.
 model User {
-  id                   String                 @id @default(uuid())
-  firstName            String                 @map("first_name")
-  lastName             String?                @map("last_name")
-  email                String                 @unique
-  emailVerified        Boolean                @default(false) @map("email_verified")
-  password             String?
-  salt                 String?
-  authenticationType   AuthenticationType     @map("authentication_type")
-  profileImageURL      String?
-  role                 UserRole               @default(USER)
-  createdAt            DateTime               @default(now()) @map("created_at")
-  updatedAt            DateTime               @updatedAt @map("updated_at")
-  ProjectAccessMapping ProjectAccessMapping[]
+  id              String              @id @default(auto()) // Use auto() for UUID
+  firstName       String              @map("first_name")
+  lastName        String?             @map("last_name")
+  email           String              @unique
+  emailVerified   Boolean             @default(false)   @map("email_verified")
+  password        String?             // Password should be hashed, not stored in plaintext
+  salt            String?             // Salt for password hashing
+  authenticationType AuthenticationType @map("authentication_type")
+  profileImageURL String?
+  role            UserRole            @default(USER)
+  createdAt       DateTime            @default(now())   @map("created_at")
+  updatedAt       DateTime            @updatedAt        @map("updated_at")
+
+  // Define relationships with other models
+  ProjectAccessMappings ProjectAccessMapping[]
   Forms                Form[]
 
   @@map("users")
 }
 
+// Project model represents projects in the application.
 model Project {
-  id                   String                 @id @default(uuid())
-  name                 String
-  slug                 String                 @unique
-  createdAt            DateTime               @default(now()) @map("created_at")
-  updatedAt            DateTime               @updatedAt @map("updated_at")
-  ProjectAccessMapping ProjectAccessMapping[]
+  id        String   @id @default(auto()) // Use auto() for UUID
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt        @map("updated_at")
+
+  // Define relationships with other models
+  ProjectAccessMappings ProjectAccessMapping[]
   Forms                Form[]
 
   @@map("projects")
 }
 
+// ProjectAccessMapping model defines user roles and access levels for projects.
 model ProjectAccessMapping {
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId String  @map("project_id")
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @map("user_id")
-
-  role ProjectAccessRole @default(OWNER)
+  project   Project            @relation(fields: [projectId], references: [id])
+  projectId String             @map("project_id")
+  user      User               @relation(fields: [userId], references: [id])
+  userId    String             @map("user_id")
+  role      ProjectAccessRole @default(OWNER)
 
   @@unique([projectId, userId])
   @@map("project_access_mapping")
 }
 
+// Form model represents forms in the application.
 model Form {
-  id   String @id @default(uuid())
-  name String
-  slug String
+  id                    String   @id @default(auto()) // Use auto() for UUID
+  name                  String
+  slug                  String   @unique
+  introTitle            String   @map("intro_title")
+  introMessage          String?  @map("intro_message")
+  promptTitle           String   @map("prompt_title")
+  promptDescription     String?  @map("prompt_description")
+  thankyouTitle         String   @map("thankyou_title")
+  thankyouMessage       String?  @map("thankyou_message")
+  enableCTA             Boolean  @default(false)   @map("enable_cta")
+  ctaTitle              String?  @map("cta_title")
+  ctaURL                String?  @map("cta_url")
+  projectId             String
+  createdByUserId       String   @map("created_by")
+  isActive              Boolean  @default(true)    @map("is_active")
+  primaryColor          String   @default("#6701E6") @map("primary_color_hex_code")
+  backgroundColor       String   @default("#FFFFFF") @map("background_color_hex_code")
+  lang                  String   @default("en")
+  collectVideoTestimonials Boolean  @default(false)  @map("collect_video_testimonials")
+  collectTextTestimonials Boolean  @default(true)   @map("collect_text_testimonials")
+  collectRatings         Boolean  @default(true)   @map("collect_ratings")
+  collectImages          Boolean  @default(true)   @map("collect_images")
+  collectEmail           Boolean  @default(true)   @map("collect_email")
+  collectJobTitle        Boolean  @default(true)   @map("collect_job_title")
+  collectUserImage       Boolean  @default(true)   @map("collect_user_image")
+  collectWebsiteURL      Boolean  @default(true)   @map("collect_website_url")
+  collectCompany         Boolean  @default(true)   @map("collect_company")
+  autoApproveTestimonials Boolean  @default(false)  @map("auto_approve_testimonials")
+  autoAddTags            String[] @default([])     @map("auto_add_tags")
+  createdAt              DateTime @default(now())  @map("created_at")
+  updatedAt              DateTime @updatedAt       @map("updated_at")
 
-  introTitle   String  @map("intro_title")
-  introMessage String? @map("intro_message")
-
-  promptTitle       String  @map("prompt_title")
-  promptDescription String? @map("prompt_description")
-
-  thankyouTitle   String  @map("thankyou_title")
-  thankyouMessage String? @map("thankyou_message")
-
-  enableCTA Boolean @default(false) @map("enable_cta")
-  ctaTitle  String? @map("cta_title")
-  ctaURL    String? @map("cta_url")
-
-  // Foreign Relations
-  project         Project @relation(fields: [projectId], references: [id])
-  projectId       String  @map("project_id")
-  createdBy       User    @relation(fields: [createdByUserId], references: [id])
-  createdByUserId String  @map("created_by")
-
-  isActive Boolean @default(true) @map("is_active")
-
-  // Design
-  primaryColor    String @default("#6701E6") @map("primary_color_hex_code")
-  backgroundColor String @default("#FFFFFF") @map("background_color_hex_code")
-
-  // Prefrences
-  lang                     String  @default("en")
-  collectVideoTestimonials Boolean @default(false) @map("collect_video_testimonials")
-  collectTextTestimonials  Boolean @default(true) @map("collect_text_testimonials")
-  collectRatings           Boolean @default(true) @map("collect_ratings")
-  collectImages            Boolean @default(true) @map("collect_images")
-  collectEmail             Boolean @default(true) @map("collect_email")
-  collectJobTitle          Boolean @default(true) @map("collect_job_title")
-  collectUserImage         Boolean @default(true) @map("collect_user_image")
-  collectWebsiteURL        Boolean @default(true) @map("collect_website_url")
-  collectCompany           Boolean @default(true) @map("collect_company")
-
-  autoApproveTestimonials Boolean  @default(false) @map("auto_approve_testimonials")
-  autoAddTags             String[] @default([]) @map("auto_add_tags")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  // Define relationships with other models
+  project   Project @relation(fields: [projectId], references: [id])
+  createdBy User    @relation(fields: [createdByUserId], references: [id])
 
   @@unique([slug, projectId])
   @@map("forms")
