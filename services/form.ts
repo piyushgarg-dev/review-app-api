@@ -1,5 +1,5 @@
 import prismaClient from '../db'
-import { UpdateFormData } from '../functions/graphql/form/interfaces'
+import { UpdateFormInput } from '../graphql/types.generated'
 
 class FormService {
   public static createForm = prismaClient.form.create
@@ -12,7 +12,7 @@ class FormService {
     return prismaClient.form.findUnique({ where: { id } })
   }
 
-  public static updateFormById(id: string, formData: UpdateFormData) {
+  public static updateFormById(id: string, formData: UpdateFormInput) {
     return prismaClient.form.update({
       data: {
         ...formData,
