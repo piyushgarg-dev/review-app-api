@@ -31,7 +31,7 @@ const queries = {
     ctx: ServerContext
   ) => {
     ensureAuthenticated(ctx)
-    return FormService.getFormResponsesByFormId(input.formId)
+    return FormService.getFormResponsesByFormId(input.formId, ctx)
   },
 }
 

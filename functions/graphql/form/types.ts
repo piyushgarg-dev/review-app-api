@@ -98,7 +98,6 @@ export const types = `#graphql
     type FormResponse {
         id: ID!
 
-        form: Form
         formId: String!
 
         name: String!
@@ -109,6 +108,9 @@ export const types = `#graphql
         jobTitle: String
         websiteUrl: String
         company: String
+
+        tags: [String]
+        approved: Boolean
 
         reatedAt: Date
         updatedAt: Date
