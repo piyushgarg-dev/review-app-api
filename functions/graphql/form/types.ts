@@ -101,9 +101,9 @@ export const types = `#graphql
         form: Form
         formId: String!
 
-        userName: String!
-        userEmail: String
-        userImage: String
+        name: String!
+        email: String
+        imageURL: String
         rating: Int
         testimonial: String!
         jobTitle: String
@@ -117,9 +117,9 @@ export const types = `#graphql
     input SubmitFormResponseData {
         formId: String!
 
-        userName: String!
-        userEmail: String
-        userImage: String
+        name: String!
+        email: String
+        imageURL: String
         rating: Int
         testimonial: String!
         jobTitle: String
@@ -127,7 +127,7 @@ export const types = `#graphql
         company: String
     }
 
-    input GetFormResponsesInput {
+    input GetFormResponsesByFormIdInput {
         formId: ID!
     }
 `

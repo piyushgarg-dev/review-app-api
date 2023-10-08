@@ -4,11 +4,13 @@ import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
 import {
   CreateFormData,
-  GetFormResponsesInput,
+  GetFormResponsesByFormIdInput,
   GetFormsInput,
   SubmitFormResponseData,
   UpdateFormData,
 } from './interfaces'
+import BadRequestError from '../../../errors/BadRequestError'
+import prismaClient from '../../../db'
 
 const queries = {
   getForms: async (
@@ -25,7 +27,7 @@ const queries = {
   },
   getFormResponses: async (
     _: any,
-    { input }: { input: GetFormResponsesInput },
+    { input }: { input: GetFormResponsesByFormIdInput },
     ctx: ServerContext
   ) => {
     ensureAuthenticated(ctx)
@@ -77,19 +79,31 @@ const mutations = {
     { data }: { data: SubmitFormResponseData },
     ctx: ServerContext
   ) => {
-    const { formId, ...otherData } = data
+    const { formId } = data
 
     //Check if form exist with given id
-    const form = await FormService.getFormById(formId)
+    const form = await prismaClient.form.findUnique({
+      where: { id: formId },
+      select: { id: true },
+    })
 
     if (!form) {
-      throw new Error('No form exist with given id')
+      throw new BadRequestError('No form exist with given id')
     }
 
     const formResponse = await FormService.createFormResponse({
       data: {
-        ...otherData,
+        //required field
+        name: data.name,
         form: { connect: { id: formId } },
+        testimonial: data.testimonial,
+
+        email: data.email,
+        imageURL: data.imageURL,
+        rating: data.rating,
+        jobTitle: data.jobTitle,
+        websiteUrl: data.websiteUrl,
+        company: data.company,
       },
     })
     return formResponse.id

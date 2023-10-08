@@ -130,16 +130,18 @@ model FormResponse {
   form   Form   @relation(fields: [formId], references: [id])
   formId String @map("form_id")
 
-  userName    String   @map("user_name")
-  userEmail   String?  @unique @map("user_email")
-  userImage   String?  @map("user_image")
+  // Form filler details
+  name        String
+  email       String?
+  imageURL    String? @map("image_url")
   rating      Int?
-  testimonial String   @map("testimonial")
-  jobTitle    String?  @map("job_title")
-  websiteUrl  String?  @map("website_url")
+  testimonial String  @map("testimonial")
+  jobTitle    String? @map("job_title")
+  websiteUrl  String? @map("website_url")
   company     String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("form_responses")
 }

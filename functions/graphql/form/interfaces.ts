@@ -48,9 +48,9 @@ export interface UpdateFormData {
 export interface SubmitFormResponseData {
   id: string
   formId: string
-  userName: string
-  userEmail?: string
-  userImage?: string
+  name: string
+  email?: string
+  imageURL?: string
   rating?: number
   testimonial: string
   jobTitle?: string
@@ -58,6 +58,6 @@ export interface SubmitFormResponseData {
   company?: string
 }
 
-export interface GetFormResponsesInput {
+export interface GetFormResponsesByFormIdInput {
   formId: string
 }
