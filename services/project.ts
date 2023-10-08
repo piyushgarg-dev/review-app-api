@@ -1,5 +1,4 @@
 import prismaClient from '../db'
-
 class ProjectService {
   public static create = prismaClient.project.create
 
@@ -9,19 +8,20 @@ class ProjectService {
     })
   }
 
-  public static getProjectBySlug({
-    slug,
+  public static async getProjectByDomain({
+    domain,
     userId,
   }: {
-    slug: string
+    domain: string
     userId: string
   }) {
-    return prismaClient.project.findUnique({
+    const [project] = await prismaClient.project.findMany({
       where: {
-        slug,
+        OR: [{ subdomain: domain }, { customDomain: domain }],
         ProjectAccessMapping: { every: { user: { id: userId } } },
       },
     })
+    return project
   }
 }
 

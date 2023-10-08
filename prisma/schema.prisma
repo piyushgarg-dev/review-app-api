@@ -47,7 +47,8 @@ model User {
 model Project {
   id                   String                 @id @default(uuid())
   name                 String
-  slug                 String                 @unique
+  subdomain            String                 @unique
+  customDomain         String?                @unique @map("custom_domain")
   createdAt            DateTime               @default(now()) @map("created_at")
   updatedAt            DateTime               @updatedAt @map("updated_at")
   ProjectAccessMapping ProjectAccessMapping[]
