@@ -84,11 +84,11 @@ const mutations = {
     //Check if form exist with given id
     const form = await prismaClient.form.findUnique({
       where: { id: formId },
-      select: { id: true },
+      select: { id: true, autoAddTags: true, autoApproveTestimonials: true },
     })
 
-    if (!form) {
-      throw new BadRequestError('No form exist with given id')
+    if (!form || !form.id) {
+      throw new BadRequestError(`Form with id ${formId} does not exists`)
     }
 
     const formResponse = await FormService.createFormResponse({
@@ -104,6 +104,9 @@ const mutations = {
         jobTitle: data.jobTitle,
         websiteUrl: data.websiteUrl,
         company: data.company,
+
+        approved: Boolean(form.autoApproveTestimonials),
+        tags: form.autoAddTags,
       },
     })
     return formResponse.id
