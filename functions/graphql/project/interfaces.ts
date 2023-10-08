@@ -1,4 +1,5 @@
 export interface CreateProjectData {
   name: string
-  slug: string
+  subdomain: string
+  customDomain?: string
 }

@@ -1,4 +1,3 @@
-import slugify from 'slugify'
 import ProjectService from '../../../services/project'
 import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
@@ -11,14 +10,14 @@ const queries = {
     ensureAuthenticated(ctx)
     return ProjectService.getUserProjects(ctx.user?.id!)
   },
-  getProjectBySlug: async (
+  getProjectByDomain: async (
     _: any,
-    { slug }: { slug: string },
+    { domain }: { domain: string },
     ctx: ServerContext
   ) => {
     ensureAuthenticated(ctx)
-    const project = await ProjectService.getProjectBySlug({
-      slug,
+    const project = await ProjectService.getProjectByDomain({
+      domain,
       userId: ctx.user?.id!,
     })
     return project
@@ -34,7 +33,8 @@ const mutations = {
     const project = await ProjectService.create({
       data: {
         name: data.name,
-        slug: slugify(data.slug),
+        customDomain: data.customDomain,
+        subdomain: data.subdomain,
         ProjectAccessMapping: {
           create: {
             role: 'OWNER',
