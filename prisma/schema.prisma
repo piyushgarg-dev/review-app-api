@@ -140,6 +140,9 @@ model FormResponse {
   websiteUrl  String? @map("website_url")
   company     String?
 
+  tags     String[] @default([]) @map("tags")
+  approved Boolean  @default(false)
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
