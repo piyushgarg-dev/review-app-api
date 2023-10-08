@@ -1,0 +1,30 @@
+input CreateUserData {
+  firstName: String!
+  lastName: String
+  email: String!
+  password: String!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: String!
+  emailVerified: Boolean!
+  authenticationType: String
+  profileImageURL: String
+  role: String
+
+  createdAt: Date
+  updatedAt: Date
+}
+
+extend type Query {
+  getSessionUser: User
+  verifyGoogleAuthToken(googleToken: String!): String
+  singinwithEmailPassword(email: String!, password: String): String
+}
+
+extend type Mutation {
+  createUser(data: CreateUserData!): User
+}
