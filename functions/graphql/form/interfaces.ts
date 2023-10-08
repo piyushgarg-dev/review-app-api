@@ -44,3 +44,20 @@ export interface UpdateFormData {
   autoApproveTestimonials?: boolean
   autoAddTags?: [string]
 }
+
+export interface SubmitFormResponseData {
+  id: string
+  formId: string
+  name: string
+  email?: string
+  imageURL?: string
+  rating?: number
+  testimonial: string
+  jobTitle?: string
+  websiteUrl?: string
+  company?: string
+}
+
+export interface GetFormResponsesByFormIdInput {
+  formId: string
+}

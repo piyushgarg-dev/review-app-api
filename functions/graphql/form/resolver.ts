@@ -2,7 +2,15 @@ import slugify from 'slugify'
 import FormService from '../../../services/form'
 import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
-import { CreateFormData, GetFormsInput, UpdateFormData } from './interfaces'
+import {
+  CreateFormData,
+  GetFormResponsesByFormIdInput,
+  GetFormsInput,
+  SubmitFormResponseData,
+  UpdateFormData,
+} from './interfaces'
+import BadRequestError from '../../../errors/BadRequestError'
+import prismaClient from '../../../db'
 
 const queries = {
   getForms: async (
@@ -16,6 +24,14 @@ const queries = {
   getFormById: async (_: any, { id }: { id: string }, ctx: ServerContext) => {
     ensureAuthenticated(ctx)
     return FormService.getFormById(id)
+  },
+  getFormResponses: async (
+    _: any,
+    { input }: { input: GetFormResponsesByFormIdInput },
+    ctx: ServerContext
+  ) => {
+    ensureAuthenticated(ctx)
+    return FormService.getFormResponsesByFormId(input.formId, ctx)
   },
 }
 
@@ -56,6 +72,44 @@ const mutations = {
     ensureAuthenticated(ctx)
     await FormService.updateFormById(data.id, data)
     return true
+  },
+
+  submitFormResponse: async (
+    _: any,
+    { data }: { data: SubmitFormResponseData },
+    ctx: ServerContext
+  ) => {
+    const { formId } = data
+
+    //Check if form exist with given id
+    const form = await prismaClient.form.findUnique({
+      where: { id: formId },
+      select: { id: true, autoAddTags: true, autoApproveTestimonials: true },
+    })
+
+    if (!form || !form.id) {
+      throw new BadRequestError(`Form with id ${formId} does not exists`)
+    }
+
+    const formResponse = await FormService.createFormResponse({
+      data: {
+        //required field
+        name: data.name,
+        form: { connect: { id: formId } },
+        testimonial: data.testimonial,
+
+        email: data.email,
+        imageURL: data.imageURL,
+        rating: data.rating,
+        jobTitle: data.jobTitle,
+        websiteUrl: data.websiteUrl,
+        company: data.company,
+
+        approved: Boolean(form.autoApproveTestimonials),
+        tags: form.autoAddTags,
+      },
+    })
+    return formResponse.id
   },
 }
 

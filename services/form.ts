@@ -1,5 +1,7 @@
 import prismaClient from '../db'
+import AccessDeniedError from '../errors/AccessDeniedError'
 import { UpdateFormData } from '../functions/graphql/form/interfaces'
+import { ServerContext } from '../functions/graphql/interfaces'
 
 class FormService {
   public static createForm = prismaClient.form.create
@@ -25,6 +27,27 @@ class FormService {
         id: undefined,
       },
       where: { id },
+    })
+  }
+
+  public static createFormResponse = prismaClient.formResponse.create
+
+  public static getFormResponsesByFormId(formId: string, ctx: ServerContext) {
+    if (!ctx.user?.id) throw new AccessDeniedError()
+
+    return prismaClient.formResponse.findMany({
+      where: {
+        AND: [
+          {
+            form: {
+              id: formId,
+              project: {
+                ProjectAccessMapping: { every: { user: { id: ctx.user.id } } }, // TODO: Need to test more deeply
+              },
+            },
+          },
+        ],
+      },
     })
   }
 }
