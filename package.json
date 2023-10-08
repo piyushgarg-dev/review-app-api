@@ -9,14 +9,22 @@
     "migrate:latest": "dotenv -c local -- prisma migrate deploy",
     "prisma:migrate:local": "dotenv -c local -- prisma migrate dev",
     "prisma:generate": "prisma generate",
-    "prisma:studio": "dotenv -c local -- prisma studio"
+    "prisma:studio": "dotenv -c local -- prisma studio",
+    "generate": "graphql-codegen"
   },
   "devDependencies": {
+    "@eddeee888/gcg-typescript-resolver-files": "^0.6.0",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/near-operation-file-preset": "^3.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
     "@types/jsonwebtoken": "^9.0.2",
     "concurrently": "^8.2.0",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.2.1",
     "esbuild": "^0.19.1",
+    "graphql-scalars": "^1.22.2",
+    "prettier": "^3.0.3",
     "prisma": "^5.1.1",
     "serverless": "^3.34.0",
     "serverless-dotenv-plugin": "^6.0.0",
@@ -33,5 +41,14 @@
     "jsonwebtoken": "^9.0.1",
     "nanoid": "^4.0.2",
     "slugify": "^1.6.6"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "endOfLine": "auto",
+    "bracketSameLine": true
   }
 }

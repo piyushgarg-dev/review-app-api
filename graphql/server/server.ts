@@ -1,11 +1,10 @@
 import { ApolloServer } from '@apollo/server'
-import { startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda'
-import { createAPIGatewayProxyEventRequestHandler } from './RequestHandler'
 import UserService from '../../services/user'
-
-import typeDefs from './typeDefs'
-import resolvers from './resolvers'
-import { ServerContext } from './interfaces'
+import { ServerContext } from './ServerContext'
+import { resolvers } from '../resolvers.generated'
+import { typeDefs } from '../typeDefs.generated'
+import { createAPIGatewayProxyEventRequestHandler } from './RequestHandler'
+import { startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda'
 
 const server = new ApolloServer<ServerContext>({
   typeDefs,

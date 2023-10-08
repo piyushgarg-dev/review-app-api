@@ -1,0 +1,23 @@
+input CreateProjectData {
+  name: String!
+  subdomain: String!
+  customDomain: String
+}
+
+type Project {
+  id: ID!
+  name: String!
+  subdomain: String!
+  customDomain: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+extend type Query {
+  getUserProjects: [Project]
+  getProjectByDomain(domain: String!): Project
+}
+
+extend type Mutation {
+  createProject(data: CreateProjectData!): Project
+}
