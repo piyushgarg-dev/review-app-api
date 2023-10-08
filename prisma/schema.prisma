@@ -113,6 +113,7 @@ model Form {
 
   autoApproveTestimonials Boolean  @default(false) @map("auto_approve_testimonials")
   autoAddTags             String[] @default([]) @map("auto_add_tags")
+  chore: Update schema.prisma
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
