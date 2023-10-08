@@ -73,7 +73,7 @@ model ProjectAccessMapping {
 model Form {
   id   String @id @default(uuid())
   name String
-  slug String
+  slug String @unique
 
   introTitle   String  @map("intro_title")
   introMessage String? @map("intro_message")

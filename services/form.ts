@@ -14,6 +14,12 @@ class FormService {
     return prismaClient.form.findUnique({ where: { id } })
   }
 
+  public static getFormBySlug(slug: string, customDomain?: string) {
+    return prismaClient.form.findUnique({
+      where: { slug, project: { customDomain: customDomain } },
+    })
+  }
+
   public static updateFormById(id: string, formData: UpdateFormData) {
     return prismaClient.form.update({
       data: {

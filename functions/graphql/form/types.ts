@@ -45,6 +45,11 @@ export const types = `#graphql
     input GetFormsInput {
         projectId: ID!
     }
+
+    input GetFormBySlugInput {
+        formSlug: String!
+        customDomain: String
+    }
     
     type Form {
         id: ID!
