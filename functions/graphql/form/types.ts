@@ -94,4 +94,40 @@ export const types = `#graphql
         updatedAt: Date
 
     }
+
+    type FormResponse {
+        id: ID!
+
+        form: Form
+        formId: String!
+
+        userName: String!
+        userEmail: String
+        userImage: String
+        rating: Int
+        testimonial: String!
+        jobTitle: String
+        websiteUrl: String
+        company: String
+
+        reatedAt: Date
+        updatedAt: Date
+    }
+
+    input SubmitFormResponseData {
+        formId: String!
+
+        userName: String!
+        userEmail: String
+        userImage: String
+        rating: Int
+        testimonial: String!
+        jobTitle: String
+        websiteUrl: String
+        company: String
+    }
+
+    input GetFormResponsesInput {
+        formId: ID!
+    }
 `

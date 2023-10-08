@@ -114,9 +114,31 @@ model Form {
   autoApproveTestimonials Boolean  @default(false) @map("auto_approve_testimonials")
   autoAddTags             String[] @default([]) @map("auto_add_tags")
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+  responses FormResponse[]
 
   @@unique([slug, projectId])
   @@map("forms")
+}
+
+model FormResponse {
+  id String @id @default(uuid())
+
+  // Relations
+  form   Form   @relation(fields: [formId], references: [id])
+  formId String @map("form_id")
+
+  userName    String   @map("user_name")
+  userEmail   String?  @unique @map("user_email")
+  userImage   String?  @map("user_image")
+  rating      Int?
+  testimonial String   @map("testimonial")
+  jobTitle    String?  @map("job_title")
+  websiteUrl  String?  @map("website_url")
+  company     String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("form_responses")
 }

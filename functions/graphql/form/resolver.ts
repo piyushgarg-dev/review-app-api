@@ -2,7 +2,13 @@ import slugify from 'slugify'
 import FormService from '../../../services/form'
 import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
-import { CreateFormData, GetFormsInput, UpdateFormData } from './interfaces'
+import {
+  CreateFormData,
+  GetFormResponsesInput,
+  GetFormsInput,
+  SubmitFormResponseData,
+  UpdateFormData,
+} from './interfaces'
 
 const queries = {
   getForms: async (
@@ -16,6 +22,14 @@ const queries = {
   getFormById: async (_: any, { id }: { id: string }, ctx: ServerContext) => {
     ensureAuthenticated(ctx)
     return FormService.getFormById(id)
+  },
+  getFormResponses: async (
+    _: any,
+    { input }: { input: GetFormResponsesInput },
+    ctx: ServerContext
+  ) => {
+    ensureAuthenticated(ctx)
+    return FormService.getFormResponsesByFormId(input.formId)
   },
 }
 
@@ -56,6 +70,29 @@ const mutations = {
     ensureAuthenticated(ctx)
     await FormService.updateFormById(data.id, data)
     return true
+  },
+
+  submitFormResponse: async (
+    _: any,
+    { data }: { data: SubmitFormResponseData },
+    ctx: ServerContext
+  ) => {
+    const { formId, ...otherData } = data
+
+    //Check if form exist with given id
+    const form = await FormService.getFormById(formId)
+
+    if (!form) {
+      throw new Error('No form exist with given id')
+    }
+
+    const formResponse = await FormService.createFormResponse({
+      data: {
+        ...otherData,
+        form: { connect: { id: formId } },
+      },
+    })
+    return formResponse.id
   },
 }
 

@@ -27,6 +27,14 @@ class FormService {
       where: { id },
     })
   }
+
+  public static createFormResponse = prismaClient.formResponse.create
+
+  public static getFormResponsesByFormId(formId: string) {
+    return prismaClient.formResponse.findMany({
+      where: { form: { id: formId } },
+    })
+  }
 }
 
 export default FormService
