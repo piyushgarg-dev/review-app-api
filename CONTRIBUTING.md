@@ -110,3 +110,34 @@ When you're ready to submit your changes, create a pull request (PR) following o
 Please note that we have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contributors to follow. Ensure you read and adhere to it throughout your contribution journey.
 
 We appreciate your contributions and look forward to collaborating with you!
+
+
+## Help for Docker setup && Yarn setup
+
+### Yarn setup:
+
+You can install Yarn globally through NPM packages(Remeber NPM comes packaged with Node.js)
+
+```bash
+   npm install --global yarn
+   ```
+
+Check the Yarn Version  
+
+```bash
+   yarn --version
+   ```
+
+### Docker setup:
+
+1.You can install Docker (Required) by visiting the  below page:
+
+https://www.docker.com/get-started/
+
+2.You can install Docker Desktop by visiting the  below page: 
+
+https://docs.docker.com/desktop/
+
+
+
+
