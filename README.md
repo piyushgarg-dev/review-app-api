@@ -13,10 +13,15 @@ Go to [this repository](https://github.com/piyushgarg-dev/review-app) to know mo
 1. Pre-requisites :
 
     a. Clone the Repo : `git clone https://github.com/piyushgarg-dev/review-app-api.git`
-    b. Move to backend foler : `cd review-app-api`
+   
+    b. Move to backend folder : `cd review-app-api`
+   
     c. Install and Setup Docker
-    d. Run Docker in background    
+   
+    d. Run Docker in background
+      
     e. Run this command to run "docker-compose.yml" file in detach mode : `docker compose up -d`
+   
     f. Setup Backend by running command : `yarn`
 
 2. Create a `.env.local` file in the project's root directory
