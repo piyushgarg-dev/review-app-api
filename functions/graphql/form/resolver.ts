@@ -74,6 +74,12 @@ const mutations = {
     return true
   },
 
+  deleteForm: async (_: any,{formId,slugId}: {formId : string,slugId: string},ctx : ServerContext) => {
+    ensureAuthenticated(ctx)
+    await FormService.deleteForm(formId,slugId)
+    return true
+  },
+
   submitFormResponse: async (
     _: any,
     { data }: { data: SubmitFormResponseData },

@@ -32,6 +32,17 @@ class FormService {
 
   public static createFormResponse = prismaClient.formResponse.create
 
+  public static deleteForm(formId : string, slugId : string) {
+    return prismaClient.form.delete({
+        where: {
+            id: formId ,
+            slug: slugId 
+        }
+      });
+  }
+ 
+  
+
   public static getFormResponsesByFormId(formId: string, ctx: ServerContext) {
     if (!ctx.user?.id) throw new AccessDeniedError()
 
