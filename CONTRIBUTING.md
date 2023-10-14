@@ -31,6 +31,9 @@ configured on your local machine:
 - Node.js and npm: To install project dependencies.
 - Yarn: To manage Node.js packages effectively.
 
+![](./contri-images/pre1.png)
+![](./contri-images/pre2.png)
+
 ## Contributing Guidelines
 
 We follow these guidelines for contributing:
@@ -122,6 +125,8 @@ You can replace superman123 with any secret of your choice.
    ```
 
 7. The backend will be up and running on port 8000.
+   ![Screenshot of a specific code snippet:](./contri-images/code_snippet.png)
+   ![Preview](./contri-images/app%20preview.png)
 
 ## Submitting a Pull Request (PR)
 
