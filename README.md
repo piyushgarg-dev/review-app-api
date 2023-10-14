@@ -48,7 +48,7 @@ We appreciate your contributions and look forward to working with you to make th
 
 ## Best Contributors
 
-<div align="center">
+<div>
     <a  href="https://github.com/piyushgarg-dev/review-app-api/graphs/contributors">
         <img src="https://contrib.rocks/image?repo=piyushgarg-dev/review-app-api&anon=1" />
     </a>
