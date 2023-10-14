@@ -4,6 +4,7 @@ import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
 import {
   CreateFormData,
+  GetFormBySlugInput,
   GetFormResponsesByFormIdInput,
   GetFormsInput,
   SubmitFormResponseData,
@@ -24,6 +25,22 @@ const queries = {
   getFormById: async (_: any, { id }: { id: string }, ctx: ServerContext) => {
     ensureAuthenticated(ctx)
     return FormService.getFormById(id)
+  },
+  getFormBySlug: async (
+    _: any,
+    { input }: { input: GetFormBySlugInput },
+    ctx: ServerContext
+  ) => {
+    // Check if form exist with given id
+    const { formSlug, customDomain } = input
+    const form = await FormService.getFormBySlug(formSlug, customDomain)
+    if (!form || !form.id) {
+      throw new BadRequestError(
+        `Form with this url ${formSlug} does not exists`
+      )
+    }
+
+    return form
   },
   getFormResponses: async (
     _: any,
