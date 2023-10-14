@@ -44,6 +44,10 @@ For more information about the project, visit the [frontend repository](https://
 5. Set up the backend by running the following command:
    ```shell
    yarn
+   
+   #or
+
+   npm install
    ```
 
 ### Create a `.env.local` file in the project's root directory.
@@ -59,8 +63,28 @@ JWT_SECRET=superman123
 
 Run database migrations with the following command:
 
+**For First-Time Setup:**
+
+Use this command to perform local database migration when starting the project for the first time. It initializes the database.
+
+```shell
+yarn prisma:migrate:local
+
+#or
+
+npm run prisma:migrate:local
+```
+
+**For Subsequent Migrations:**
+
+Use this command for applying the latest database migrations once the project is already set up. It updates the database schema.
+
 ```shell
 yarn migrate:latest
+
+#or
+
+npm run migrate:latest
 ```
 
 ### Start the Backend Server:
@@ -69,6 +93,10 @@ To start the backend server, run the following command:
 
 ```shell
 yarn local
+
+#or 
+
+npm run local
 ```
 
 Congratulations! Your backend is now running at http://localhost:8000/local/graphql.
