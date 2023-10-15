@@ -83,15 +83,15 @@ To set up the development environment locally, follow these steps:
 
   You can replace superman123 with any secret of your choice.
 
-5. Run database migrations to set up the database:
+6. Run database migrations to set up the database:
    ```bash
    yarn migrate:latest
 
-6. Start the local development server:
+7. Start the local development server:
    ```bash
    yarn local
 
-7. The backend will be up and running on port 8000.
+8. The backend will be up and running on port 8000.
 
 ## Submitting a Pull Request (PR)
 
