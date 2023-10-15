@@ -65,7 +65,7 @@ export const types = `#graphql
         thankyouMessage: String
 
         name: String!
-        
+
         enableCTA: Boolean!
         ctaTitle: String
         ctaURL: String
@@ -79,7 +79,7 @@ export const types = `#graphql
         collectUserImage: Boolean!
         collectWebsiteURL: Boolean!
         collectCompany: Boolean!
-        lang: String!
+        lang: String
     }
     
     type Form {
@@ -111,7 +111,7 @@ export const types = `#graphql
         primaryColor: String!
         backgroundColor: String!
 
-        lang: String!
+        lang: String
 
         collectVideoTestimonials: Boolean!
         collectTextTestimonials: Boolean!
