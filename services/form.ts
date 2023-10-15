@@ -14,6 +14,48 @@ class FormService {
     return prismaClient.form.findUnique({ where: { id } })
   }
 
+  public static getPublicFormData({
+    domain,
+    slug,
+  }: {
+    domain: string
+    slug: string
+  }) {
+    return prismaClient.form.findFirst({
+      where: {
+        AND: [
+          {
+            project: { OR: [{ subdomain: domain }, { customDomain: domain }] },
+          },
+          { slug },
+        ],
+      },
+      select: {
+        backgroundColor: true,
+        collectCompany: true,
+        collectEmail: true,
+        collectImages: true,
+        collectJobTitle: true,
+        collectRatings: true,
+        collectUserImage: true,
+        collectTextTestimonials: true,
+        collectVideoTestimonials: true,
+        collectWebsiteURL: true,
+        ctaTitle: true,
+        enableCTA: true,
+        ctaURL: true,
+        introMessage: true,
+        introTitle: true,
+        name: true,
+        primaryColor: true,
+        promptDescription: true,
+        promptTitle: true,
+        thankyouMessage: true,
+        thankyouTitle: true,
+      },
+    })
+  }
+
   public static updateFormById(id: string, formData: UpdateFormData) {
     return prismaClient.form.update({
       data: {

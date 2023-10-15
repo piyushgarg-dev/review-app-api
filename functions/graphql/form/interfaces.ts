@@ -61,3 +61,8 @@ export interface SubmitFormResponseData {
 export interface GetFormResponsesByFormIdInput {
   formId: string
 }
+
+export interface GetPublicFormDataInput {
+  domain: string
+  formSlug: string
+}

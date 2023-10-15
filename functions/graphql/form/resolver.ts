@@ -6,6 +6,7 @@ import {
   CreateFormData,
   GetFormResponsesByFormIdInput,
   GetFormsInput,
+  GetPublicFormDataInput,
   SubmitFormResponseData,
   UpdateFormData,
 } from './interfaces'
@@ -32,6 +33,15 @@ const queries = {
   ) => {
     ensureAuthenticated(ctx)
     return FormService.getFormResponsesByFormId(input.formId, ctx)
+  },
+  getPublicFormData: async (
+    _: any,
+    { input }: { input: GetPublicFormDataInput }
+  ) => {
+    return FormService.getPublicFormData({
+      domain: input.domain,
+      slug: input.formSlug,
+    })
   },
 }
 
