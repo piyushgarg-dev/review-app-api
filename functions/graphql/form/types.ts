@@ -148,7 +148,7 @@ export const types = `#graphql
         tags: [String]
         approved: Boolean
 
-        reatedAt: Date
+        createdAt: Date
         updatedAt: Date
     }
 
@@ -167,5 +167,9 @@ export const types = `#graphql
 
     input GetFormResponsesByFormIdInput {
         formId: ID!
+    }
+
+    input GetFormResponsesByProjectIdInput {
+        projectId: ID!
     }
 `

@@ -62,6 +62,10 @@ export interface GetFormResponsesByFormIdInput {
   formId: string
 }
 
+export interface GetFormResponsesByProjectId {
+  projectId: string
+}
+
 export interface GetPublicFormDataInput {
   domain: string
   formSlug: string

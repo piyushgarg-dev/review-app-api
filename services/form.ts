@@ -74,6 +74,23 @@ class FormService {
 
   public static createFormResponse = prismaClient.formResponse.create
 
+  public static getFormResponsesByProjectId(
+    projectId: string,
+    ctx: ServerContext
+  ) {
+    if (!ctx.user?.id) throw new AccessDeniedError()
+    return prismaClient.formResponse.findMany({
+      where: {
+        form: {
+          project: {
+            id: projectId,
+            ProjectAccessMapping: { every: { user: { id: ctx.user.id } } }, // TODO: Need to test more deeply
+          },
+        },
+      },
+    })
+  }
+
   public static getFormResponsesByFormId(formId: string, ctx: ServerContext) {
     if (!ctx.user?.id) throw new AccessDeniedError()
 
