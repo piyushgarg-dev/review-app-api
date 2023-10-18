@@ -3,6 +3,11 @@ import AccessDeniedError from '../errors/AccessDeniedError'
 import { UpdateFormData } from '../functions/graphql/form/interfaces'
 import { ServerContext } from '../functions/graphql/interfaces'
 
+interface GetFormResponsesByProjectIdOptions {
+  itemsPerPage?: number
+  cursor?: string
+}
+
 class FormService {
   public static createForm = prismaClient.form.create
 
@@ -76,9 +81,11 @@ class FormService {
 
   public static getFormResponsesByProjectId(
     projectId: string,
-    ctx: ServerContext
+    ctx: ServerContext,
+    options?: GetFormResponsesByProjectIdOptions
   ) {
     if (!ctx.user?.id) throw new AccessDeniedError()
+
     return prismaClient.formResponse.findMany({
       where: {
         form: {
@@ -88,6 +95,14 @@ class FormService {
           },
         },
       },
+      cursor: options?.cursor
+        ? {
+            id: options?.cursor,
+          }
+        : undefined,
+      take: options?.itemsPerPage ?? 10,
+      skip: 1, // Skip the cursor
+      orderBy: { createdAt: 'desc' },
     })
   }
 

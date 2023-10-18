@@ -41,7 +41,11 @@ const queries = {
     ctx: ServerContext
   ) => {
     ensureAuthenticated(ctx)
-    return FormService.getFormResponsesByProjectId(input.projectId, ctx)
+    const { projectId, itemsPerPage = 10, cursor } = input
+    return FormService.getFormResponsesByProjectId(projectId, ctx, {
+      cursor,
+      itemsPerPage,
+    })
   },
   getPublicFormData: async (
     _: any,

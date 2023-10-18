@@ -64,6 +64,8 @@ export interface GetFormResponsesByFormIdInput {
 
 export interface GetFormResponsesByProjectId {
   projectId: string
+  itemsPerPage?: number
+  cursor?: string
 }
 
 export interface GetPublicFormDataInput {

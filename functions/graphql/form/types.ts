@@ -171,5 +171,7 @@ export const types = `#graphql
 
     input GetFormResponsesByProjectIdInput {
         projectId: ID!
+        itemsPerPage: Int
+        cursor: String
     }
 `
