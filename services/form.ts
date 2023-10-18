@@ -101,7 +101,7 @@ class FormService {
           }
         : undefined,
       take: options?.itemsPerPage ?? 10,
-      skip: 1, // Skip the cursor
+      skip: options?.cursor ? 1 : 0, // Skip the cursor
       orderBy: { createdAt: 'desc' },
     })
   }
