@@ -52,6 +52,7 @@ export const types = `#graphql
     }
 
     type FormPublicData {
+        id: ID!
         primaryColor: String!
         backgroundColor: String!
 

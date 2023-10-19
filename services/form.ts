@@ -57,6 +57,7 @@ class FormService {
         promptTitle: true,
         thankyouMessage: true,
         thankyouTitle: true,
+        id: true,
       },
     })
   }
