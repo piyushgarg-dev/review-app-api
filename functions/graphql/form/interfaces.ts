@@ -61,3 +61,14 @@ export interface SubmitFormResponseData {
 export interface GetFormResponsesByFormIdInput {
   formId: string
 }
+
+export interface GetFormResponsesByProjectId {
+  projectId: string
+  itemsPerPage?: number
+  cursor?: string
+}
+
+export interface GetPublicFormDataInput {
+  domain: string
+  formSlug: string
+}
