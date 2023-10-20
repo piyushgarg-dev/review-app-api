@@ -5,6 +5,11 @@ export const types = `#graphql
         projectId: String!
     }
 
+    input GetPublicFormDataInput {
+        domain: String!
+        formSlug: String!
+    }
+
     input UpdateFormInput {
         id: ID!
 
@@ -45,6 +50,38 @@ export const types = `#graphql
     input GetFormsInput {
         projectId: ID!
     }
+
+    type FormPublicData {
+        id: ID!
+        primaryColor: String!
+        backgroundColor: String!
+
+        introTitle: String!
+        introMessage: String
+
+        promptTitle: String!
+        promptDescription: String
+
+        thankyouTitle: String!
+        thankyouMessage: String
+
+        name: String!
+
+        enableCTA: Boolean!
+        ctaTitle: String
+        ctaURL: String
+
+        collectVideoTestimonials: Boolean!
+        collectTextTestimonials: Boolean!
+        collectRatings: Boolean!
+        collectImages: Boolean!
+        collectEmail: Boolean!
+        collectJobTitle: Boolean!
+        collectUserImage: Boolean!
+        collectWebsiteURL: Boolean!
+        collectCompany: Boolean!
+        lang: String
+    }
     
     type Form {
         id: ID!
@@ -75,7 +112,7 @@ export const types = `#graphql
         primaryColor: String!
         backgroundColor: String!
 
-        lang: String!
+        lang: String
 
         collectVideoTestimonials: Boolean!
         collectTextTestimonials: Boolean!
@@ -112,7 +149,7 @@ export const types = `#graphql
         tags: [String]
         approved: Boolean
 
-        reatedAt: Date
+        createdAt: Date
         updatedAt: Date
     }
 
@@ -131,5 +168,11 @@ export const types = `#graphql
 
     input GetFormResponsesByFormIdInput {
         formId: ID!
+    }
+
+    input GetFormResponsesByProjectIdInput {
+        projectId: ID!
+        itemsPerPage: Int
+        cursor: String
     }
 `
