@@ -8,10 +8,10 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: review
-      POSTGRES_PASSWORD: password
+    env_file: .env 
 
 volumes:
   postgres_data:
+
+
+  
