@@ -4,6 +4,7 @@ import { ensureAuthenticated } from '../../../utils/auth'
 import { ServerContext } from '../interfaces'
 import {
   CreateFormData,
+  DeleteFormData,
   GetFormResponsesByFormIdInput,
   GetFormResponsesByProjectId,
   GetFormsInput,
@@ -96,6 +97,17 @@ const mutations = {
     await FormService.updateFormById(data.id, data)
     return true
   },
+
+  deleteForm: async (
+    _: any,
+    { data }: { data: DeleteFormData },
+    ctx: ServerContext
+  ) => {
+    ensureAuthenticated(ctx)
+    await FormService.deleteForm(data.id)
+    return true
+  },
+
 
   submitFormResponse: async (
     _: any,

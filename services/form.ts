@@ -78,6 +78,10 @@ class FormService {
     })
   }
 
+  public static deleteForm(id: string) {
+    return prismaClient.form.delete({ where: { id }, });
+  }
+
   public static createFormResponse = prismaClient.formResponse.create
 
   public static getFormResponsesByProjectId(
@@ -98,8 +102,8 @@ class FormService {
       },
       cursor: options?.cursor
         ? {
-            id: options?.cursor,
-          }
+          id: options?.cursor,
+        }
         : undefined,
       take: options?.itemsPerPage ?? 10,
       skip: options?.cursor ? 1 : 0, // Skip the cursor
