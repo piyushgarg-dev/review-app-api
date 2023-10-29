@@ -107,21 +107,27 @@ class FormService {
     })
   }
 
-  public static getFormResponsesByFormId(formId: string, ctx: ServerContext) {
-    if (!ctx.user?.id) throw new AccessDeniedError()
-
+  public static getFormResponsesByFormId(formId: string) {
     return prismaClient.formResponse.findMany({
       where: {
-        AND: [
-          {
-            form: {
-              id: formId,
-              project: {
-                ProjectAccessMapping: { every: { user: { id: ctx.user.id } } }, // TODO: Need to test more deeply
-              },
-            },
-          },
-        ],
+        formId,
+      },
+      orderBy: {
+        updatedAt: 'desc',
+      },
+      select: {
+        approved: true,
+        company: true,
+        createdAt: true,
+        email: true,
+        imageURL: true,
+        id: true,
+        jobTitle: true,
+        rating: true,
+        testimonial: true,
+        name: true,
+        websiteUrl: true,
+        formId: true,
       },
     })
   }

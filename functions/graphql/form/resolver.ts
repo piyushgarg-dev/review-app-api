@@ -32,8 +32,7 @@ const queries = {
     { input }: { input: GetFormResponsesByFormIdInput },
     ctx: ServerContext
   ) => {
-    ensureAuthenticated(ctx)
-    return FormService.getFormResponsesByFormId(input.formId, ctx)
+    return FormService.getFormResponsesByFormId(input.formId)
   },
   getFormResponsesByProjectId: async (
     _: any,
