@@ -67,6 +67,8 @@ To set up the development environment locally, follow these steps:
    ```bash
    git clone https://github.com/yourusername/review-app-api.git cd review-app-api
 
+> ⚠️ `Windows Users` with PgAdmin installed need to stop service `postgresql` from running by manually locating it in services by typing services.msc in powershell to proceed further.
+
 2. Run Docker Compose to set up the development environment:
    ```bash
    docker-compose up -d

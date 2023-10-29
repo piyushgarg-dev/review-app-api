@@ -29,6 +29,8 @@ For more information about the project, visit the [frontend repository](https://
 
 3. Install and set up Docker.
 
+   > ⚠️ `Windows Users` with PgAdmin installed need to stop service `postgresql` from running by manually locating it in services by typing services.msc in powershell to proceed further.
+
 4. Run Docker in the background. If you have an older version of Docker, use the following command to run the `docker-compose.yml` file in detached mode:
 
    ```shell
