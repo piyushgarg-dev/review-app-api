@@ -27,7 +27,7 @@ provider:
   timeout: 25
   lambdaHashingVersion: 20201221
   region: ap-south-1
-  profile: default
+  profile: melonreviews
   environment:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${self:provider.stage}

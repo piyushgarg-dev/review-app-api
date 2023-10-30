@@ -5,7 +5,9 @@ import { ServerContext } from '../interfaces'
 import {
   CreateFormData,
   GetFormResponsesByFormIdInput,
+  GetFormResponsesByProjectId,
   GetFormsInput,
+  GetPublicFormDataInput,
   SubmitFormResponseData,
   UpdateFormData,
 } from './interfaces'
@@ -25,13 +27,33 @@ const queries = {
     ensureAuthenticated(ctx)
     return FormService.getFormById(id)
   },
-  getFormResponses: async (
+  getFormResponsesByFormId: async (
     _: any,
     { input }: { input: GetFormResponsesByFormIdInput },
     ctx: ServerContext
   ) => {
+    return FormService.getFormResponsesByFormId(input.formId)
+  },
+  getFormResponsesByProjectId: async (
+    _: any,
+    { input }: { input: GetFormResponsesByProjectId },
+    ctx: ServerContext
+  ) => {
     ensureAuthenticated(ctx)
-    return FormService.getFormResponsesByFormId(input.formId, ctx)
+    const { projectId, itemsPerPage = 10, cursor } = input
+    return FormService.getFormResponsesByProjectId(projectId, ctx, {
+      cursor,
+      itemsPerPage,
+    })
+  },
+  getPublicFormData: async (
+    _: any,
+    { input }: { input: GetPublicFormDataInput }
+  ) => {
+    return FormService.getPublicFormData({
+      domain: input.domain,
+      slug: input.formSlug,
+    })
   },
 }
 

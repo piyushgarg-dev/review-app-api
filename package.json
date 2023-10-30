@@ -5,13 +5,14 @@
   "repository": "git@github.com:piyushgarg-dev/review-app-api.git",
   "author": "Piyush Garg <piyushgarg.dev@gmail.com>",
   "scripts": {
-    "local": "dotenv -c local -- npm run prisma:generate && concurrently \"serverless offline --stage local --disableCookieValidation\"",
-    "migrate:latest": "dotenv -c local -- prisma migrate deploy",
-    "prisma:migrate:local": "dotenv -c local -- prisma migrate dev",
+    "local": "dotenv -c development -- npm run prisma:generate && concurrently \"serverless offline --stage development --disableCookieValidation\"",
+    "migrate:latest": "dotenv -c development -- prisma migrate deploy",
+    "prisma:migrate:local": "dotenv -c development -- prisma migrate dev",
     "prisma:generate": "prisma generate",
-    "prisma:studio": "dotenv -c local -- prisma studio",
+    "prisma:studio": "dotenv -c development -- prisma studio",
     "lint": "eslint .",
-    "check-types": "tsc -p tsconfig.json --noEmit"
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "deploy:prod": "dotenv -c production -- sh scripts/deploy.sh production"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",
