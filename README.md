@@ -71,7 +71,7 @@ To start the backend server, run the following command:
 yarn local
 ```
 
-Congratulations! Your backend is now running at http://localhost:8000/local/graphql.
+Congratulations! Your backend is now running at http://localhost:8000/development/graphql.
 
 ## Communication Channels:
 
