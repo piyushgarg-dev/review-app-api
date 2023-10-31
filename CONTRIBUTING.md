@@ -34,7 +34,7 @@ configured on your local machine:
 
 We follow these guidelines for contributing:
 
-1. Fork the backend repository to your GitHub account.
+1. Fork the backend repository to your GitHub account. You will find the fork button on the top right corner of the repository.
 
 2. Clone your forked repository to your local machine:
 
