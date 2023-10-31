@@ -54,11 +54,23 @@ We follow these guidelines for contributing:
 
 6. Test your changes locally to ensure they work as expected.
 
-7. Commit your changes with clear and concise commit messages:
+7. After Making change/Contribution/Modifying stage the changes to a file:
+
+   ```bash
+   git add filename
+   ```
+   or
+
+   to stage changes in all directories
+   ```bash
+   git add .
+   ```
+
+8. Commit your changes with clear and concise commit messages:
    ```bash
    git commit -m "Add feature: your feature description"
 
-8. Create a pull request (PR) to the `main` repository's `main` branch.
+9. Create a pull request (PR) to the `main` repository's `main` branch.
 
 ## Setting Up the Development Environment
 To set up the development environment locally, follow these steps:
