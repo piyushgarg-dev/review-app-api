@@ -51,6 +51,10 @@ export const types = `#graphql
         projectId: ID!
     }
 
+    input DeleteFormInput {
+        id: ID!
+    }
+
     type FormPublicData {
         id: ID!
         primaryColor: String!

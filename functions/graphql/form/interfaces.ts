@@ -8,6 +8,10 @@ export interface GetFormsInput {
   projectId: string
 }
 
+export interface DeleteFormData {
+  id: string
+}
+
 export interface UpdateFormData {
   id: string
 
