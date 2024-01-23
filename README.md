@@ -14,38 +14,16 @@ For more information about the project, visit the [frontend repository](https://
 ## Environment Setup:
 
 ### Prerequisites:
+   a. Clone the Repo : `git clone https://github.com/piyushgarg-dev/review-app-api.git`
+   b. Move to backend foler : `cd review-app-api`
+   c. Install and Setup Docker
+   d. Run Docker in background  
 
-1. Clone the repository:
-
-   ```shell
-   git clone https://github.com/piyushgarg-dev/review-app-api.git
-   ```
-
-2. Move to the backend folder:
-
-   ```shell
-   cd review-app-api
-   ```
-
-3. Install and set up Docker.
-
-4. Run Docker in the background. If you have an older version of Docker, use the following command to run the `docker-compose.yml` file in detached mode:
-
-   ```shell
-   docker-compose up -d
-   ```
-
-   Otherwise, run:
-
-   ```shell
-   docker compose up -d
-   ```
-
-5. Set up the backend by running the following command:
-   ```shell
-   yarn
-   ```
-
+   e. Run this command to run "docker-compose.yml" file in detach mode for the older version docker: 'docker-compose up -d'
+       Otherwise, run: 'docker up -d'
+   
+   f. Setup Backend by running command : `yarn`
+   
 ### Create a `.env.local` file in the project's root directory.
 
 The `.env.local` file should contain the following environment variables:
